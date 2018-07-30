@@ -1,7 +1,7 @@
 # Video Compression 
 By Eva Petakovic
 
-This tutorial covers the basic concept of video compression and some associated terminology including the . It's meant to serve as an introduction to these topics and offer jumping-off points for deeper study for college-age students.
+This tutorial covers the basic concept of video compression and some associated terminology. It's meant to serve as an introduction to these topics and offer jumping-off points for deeper study for college-age students.
 
 
 
