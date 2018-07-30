@@ -1,45 +1,23 @@
-# Video Compression Tutorial
+# Video Compression 
 By Eva Petakovic
-This tutorial is about the basic concept of compression as it applies to video
+Summary of purpose and content: This tutorial covers the basic concept of video compression and some associated terminology. It's meant to serve as an introduction to these topics and offer jumping-off points for deeper study for college-age students.
 
-Video streaming websites like YouTube, Netflix and Hulu would not be able to stream high quality, high frame rate videos without using video compression.
 
-Let's say you're watching a video with a resolution of 1920x1080 pixels, which is 2, 073,600  million pixels per frame,
-at a rate of 30 frames per second. That would amount to 62 million pixels per second. If each pixel needs 24 bits, or 3
-bytes of information, you're looking at 178 megabytes of data per second. Completely uncompressed that would be 51 gigabytes of information 
-for a 5 minute video. Even with fast internet
+Imagine watching an online video with a resolution of 1920x1080 pixels. With about 2.1 million pixels per frame, 24 bits per pixel, and at a rate of 25 frames per second, a video of this type would require 1.1 gigabits/second. Considering that the average broadband internet speed in the US is 18.7 *megabits*/second (mbps) this bitrate is impractical for the vast majority of internet users.
 
-Fortunately a 5 minute high def YouTube video is not 51 gigabytes. It is closer to 72 megabytes including audio. That's like 700 times smaller.
-How did they do that? That's the magic of video compression, which works by minimizing redundancy in the video data. There are all
-sorts of different ways to compress video, many different containers and codecs. The main thing you need to know is that there are 2 ways 
-compress video, spatial and temporal compression, which are called intraframe and interframe compression respectively. 
+By reducing redundancy in video data, compression can cut down their file sizes considerably. Containers and codecs of many different types are used to compress video, but they use two main methods: spatial and temporal compression, which are called **intraframe** and **interframe** compression respectively. 
 
-Spatial (intraframe) compression is applied only to individual video frames. To compress a video frame you can use the same process
-that's used to compress a still image like a JPEG. When a JPEG is created, color information of the image is reduced in a process called 
-chroma subsampling, and then the image is split into sections of 8X8 pixels called macroblocks. Other transformations are applied
-to these macroblocks such as discrete cosign transform, quantizing, and entropy encoding, to further reduce the file size. It's easy to 
-see this effect on an image that has been saved with a high amount of compression. All those ugly looking squares are known as compression
-artefacts. Some images, like a square of a solid color, can be compressed more than a more complicated photograph because of its simplicity
-and increased redundancy. That's how a JPEG uses spatial compression. 
+Spatial (intraframe) compression is applied to individual video frames. To compress a video frame you can use the same process used to compress a still image like a JPEG. When a JPEG is created, color data in the image is reduced in a process called 
+[chroma subsampling](https://en.wikipedia.org/wiki/Chroma_subsampling), and then the image is split into sections of 8X8 pixels called [macroblocks](https://en.wikipedia.org/wiki/Macroblock). Other transformations are applied to these macroblocks such as [discrete cosign transform](https://en.wikipedia.org/wiki/Discrete_cosine_transform), [quantizing](https://en.wikipedia.org/wiki/Quantization), and [entropy encoding](https://en.wikipedia.org/wiki/Entropy_encoding) to further reduce the file size. Evidence of these macroblocks can be seen as the smudged, blocky-looking squares visible when video has poor playback quality. In these cases they are known as [compression artifacts](https://en.wikipedia.org/wiki/Compression_artifact). A shape of a solid color can be compressed much more than a more complex image because of its simplicity and therefore increased redundancy. 
 
-For an MPEG, sometimes called a "motion JPEG", things are bit more complicated than lining up many JPEGs one after another to be used as 
-video frames. Doing it that way would not allow for interframe or temporal compression. Temporal compression works, again, by reducing
-redundancy. If you go through a video frame by frame, you'll notice that many frames are almost completely identical. That's redundancy
-which can be easily be compressed. All the parts of a video that don't change over time, like an unmoving background, all that is
-needed is an instruction for that part of the frame which says "don't change anything". Like JPEG, the MPEG standard breaks a video
-frame into 8x8 pixel macroblocks, and each block receives instructions about what to do with pixels they already have. There are
-instructions for staying exactly the same, moving, rotating, changing color, changing completely or so on. Video instructions of
-this type are called keyframes, and they use about half as much data as an i-frame, which is basically a JPEG. There are also B frames
-which are predictions, or interpolations, between I and P frames. B frames use a quarter as much data as an i frame. This is easy to
-see on a video file that has been saved in an extremely low quality setting. Again, all the fuzzy squares are called compression artefacts.
-Furthermore, sometimes a video file will be corrupted or missing some data. When that happens, you get effects caused by things like 
-missing i-frames, which clear away old image to make way for a new one. WIthout the i frame, the list of changes in the following B and P
-frames are applied to the wrong image. So now you know why a video sometimes looks weird and blocky. Those artefacts are a result of
-the video compression being either too high or some other error in the coding or transmission of the video data.
+As you move through a video frame by frame, many are almost totally identical which is a redundancy that can be easily compressed. All the parts of a video that don't change over time, like an unmoving background, only require an instruction for that part of the frame telling the pixels not to change. Like JPEG, the MPEG standard breaks a video frame into 8x8 pixel macroblocks, with each block receiving instructions about what to do with the pixels they currently have. There are instructions for staying exactly the same, moving, rotating, changing color, changing completely, and many other types of transformations. Called [keyframes](https://en.wikipedia.org/wiki/Key_frame#Video_compression) or intra-frames, these instructions use about half as much data as an I-frame, which can be thought of as a JPEG. There are also B frames which are predictions, or interpolations, between I and P frames, which are the predicted resulting frames. B frames use a quarter as much data as an I frame because they carry only the information about changes to the image between frames. The I, P and B frames are joined together in sequences that reference each other called [GOPs](https://en.wikipedia.org/wiki/Group_of_pictures) or Group of Pictures. A typical sequence for a GOP is IBBPBBP, where the initial I frame requires no extra information to decode it, the B and P frames contain motion-compensated difference information relative to frames that have already been decoded.
 
-All of this can be broken down to one thing: Bitrate. The bitrate is the amount of data, or bits, that are being used every second. If
-a video has a low bitrate, it will be low resolution and low quality with lots of compression artefacts. If a video has a high bitrate,
-it will be high quality and high resolution. The more bits you have to work with, the better the video will look. There's just no getting 
-around that even with the best compression methods. Video compression is a balancing act between a good looking video and a small file size.
-You can't have both!
+Sometimes a video file will be corrupted or missing some data. When that happens, you get effects caused by things like 
+missing I-frames, which clear away old images to make way for new ones. Without the I-frame, the list of changes in the following B and P
+frames are applied to the wrong image.
+
+All of this can be broken down to one thing: The bitrate. Bitrate is the amount of data, or bits, that are being used by the video frames each second. If a video has a low bitrate, it will be low resolution and low quality with more compression artifacts. With a high bitrate, the video will be high quality and high resolution. 
+
+
+
 
