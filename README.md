@@ -1,11 +1,15 @@
 # Video Compression 
 By Eva Petakovic
-Summary of purpose and content: This tutorial covers the basic concept of video compression and some associated terminology. It's meant to serve as an introduction to these topics and offer jumping-off points for deeper study for college-age students.
+
+This tutorial covers the basic concept of video compression and some associated terminology. It's meant to serve as an introduction to these topics and offer jumping-off points for deeper study for college-age students.
+
 
 
 Imagine watching an online video with a resolution of 1920x1080 pixels. With about 2.1 million pixels per frame, 24 bits per pixel, and at a rate of 25 frames per second, a video of this type would require 1.1 gigabits/second. Considering that the average broadband internet speed in the US is 18.7 *megabits*/second (mbps) this bitrate is impractical for the vast majority of internet users.
 
+
 By reducing redundancy in video data, compression can cut down their file sizes considerably. Containers and codecs of many different types are used to compress video, but they use two main methods: spatial and temporal compression, which are called **intraframe** and **interframe** compression respectively. 
+
 
 Spatial (intraframe) compression is applied to individual video frames. To compress a video frame you can use the same process used to compress a still image like a JPEG. When a JPEG is created, color data in the image is reduced in a process called 
 [chroma subsampling](https://en.wikipedia.org/wiki/Chroma_subsampling), and then the image is split into sections of 8X8 pixels called [macroblocks](https://en.wikipedia.org/wiki/Macroblock). Other transformations are applied to these macroblocks such as [discrete cosign transform](https://en.wikipedia.org/wiki/Discrete_cosine_transform), [quantizing](https://en.wikipedia.org/wiki/Quantization), and [entropy encoding](https://en.wikipedia.org/wiki/Entropy_encoding) to further reduce the file size. Evidence of these macroblocks can be seen as the smudged, blocky-looking squares visible when video has poor playback quality. In these cases they are known as [compression artifacts](https://en.wikipedia.org/wiki/Compression_artifact). A shape of a solid color can be compressed much more than a more complex image because of its simplicity and therefore increased redundancy. 
